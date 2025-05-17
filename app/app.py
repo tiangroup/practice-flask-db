@@ -6,9 +6,9 @@ import pymysql.cursors
 app = Flask(__name__)
 
 DB_HOST = os.getenv("DB_HOST")
-DB_USER = os.getenv("MYSQL_USER")
-DB_PASS = os.getenv("MYSQL_PASSWORD")
-DB_NAME = os.getenv("MYSQL_DATABASE")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_NAME = os.getenv("DB_NAME")
 
 
 def get_db_connection():
