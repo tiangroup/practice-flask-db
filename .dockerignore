@@ -1,7 +1,0 @@
-.dockerignore
-.git
-.gitignore
-Dockerfile
-db_data
-docker-compose.yml
-.env

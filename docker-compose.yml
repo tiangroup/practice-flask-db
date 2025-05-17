@@ -28,7 +28,7 @@ services:
       - host
 
   app:
-    build: .
+    build: ./app
     hostname: app
     restart: always
     ports:
