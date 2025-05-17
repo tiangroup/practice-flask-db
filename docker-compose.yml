@@ -1,0 +1,48 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-www_site}
+      - MYSQL_USER=${MYSQL_USER:-www_site}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    command: mysqld --sql-mode="" --innodb_use_native_aio=0
+    networks:
+      - host
+
+  pma:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=mysql
+      - UPLOAD_LIMIT="150M"
+    networks:
+      - web
+      - host
+
+  app:
+    build: .
+    hostname: app
+    restart: always
+    ports:
+      - 5000:5000
+    networks:
+      - web
+      - host
+    environment:
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - DB_HOST
+
+networks:
+  host:
+  web:
+    external: true
