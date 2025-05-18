@@ -37,10 +37,10 @@ services:
       - web
       - host
     environment:
-      - DB_NAME=${MYSQL_DATABASE}
-      - DB_USER=${MYSQL_USER}
+      - DB_NAME=${MYSQL_DATABASE:-www_site}
+      - DB_USER=${MYSQL_USER:-www_site}
       - DB_PASS=${MYSQL_PASSWORD}
-      - DB_HOST
+      - DB_HOST=${DB_HOST:-mysql}
 
 networks:
   host:
